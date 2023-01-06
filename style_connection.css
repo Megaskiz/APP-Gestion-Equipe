@@ -1,0 +1,24 @@
+.connect-page {
+    text-align: center;
+    width: 400px;
+    height: 230px;
+    box-shadow: 12px 12px 23px red;
+    border-radius: 22px;
+    grid-column: 2fr;
+    margin: auto;
+    margin-top: 10%;
+}
+
+div {
+    align-items: center;
+}
+
+body {
+    display: grid;
+    text-align: center;
+    grid-template-columns: 3fr;
+}
+
+.connect-page {
+    text-align: center;
+}
