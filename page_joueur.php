@@ -48,14 +48,18 @@ is_logged();
 
     <main>
         <div class="list_page">
-            <form action="page_add_match.php">
-                <button type="submit">ajouter un match</button>
+            <form action="page_add_joueur.php">
+                <button type="submit">ajouter un joueur</button>
             </form>
             <hr class="dashed">
             <?php
+
+
+
+
             ///Sélection de tout le contenu de la table enfant
             try {
-                $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`;');
+                $res = $linkpdo->query("SELECT * FROM joueur;");
             } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                 die('Erreur : ' . $e->getMessage());
             }
@@ -91,6 +95,8 @@ is_logged();
 
             /// fermeture du curseur des résultats
             $res->closeCursor();
+
+            
             ?>
         </div>
 
