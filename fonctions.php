@@ -31,15 +31,12 @@ function uploadImage($photo)
     return $result;
 }
 
-
-
-
 function is_logged(){
     session_start();
     if( !isset($_SESSION['logged_user']) ){
        echo"vous n'etes pas connecté : ";
        echo'<a href="html_login.php">aller vers la page de connexion</a>';
-       header("location: html_login.php");
+       header("location: page_connection.php");
        exit();
     }
 }
