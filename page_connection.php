@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family: Arial,sans-serif;">
 
 <head>
     <meta charset="UTF-8">
@@ -40,7 +40,7 @@
         $count = $res->fetchColumn();
         if ($count == 1) {
             session_start();
-            $_SESSION['login_user'] = $id;
+            $_SESSION['logged_user'] = $id;
             header("location:page_accueil.php");
         } else {
             echo "identifiant ou mot de passe invalide";

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-family: Arial,sans-serif;">
+<?php
+require('fonctions.php');
+is_logged();
+?>
 
 <head>
     <meta charset="UTF-8">
