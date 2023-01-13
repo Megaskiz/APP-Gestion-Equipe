@@ -8,7 +8,7 @@ is_logged();
 <head>
     <meta charset="UTF-8">
     <title>Page d'accueil</title>
-    <link rel="stylesheet" href="style_accueil.css">
+    <link rel="stylesheet" href="style_match.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@ is_logged();
     ?>
     <header>
         <div>
-            <h1><a href="page_accueil.php">Page d'accueil</a></h1> </br>
+            <h1><a class="title1" href="page_accueil.php">Page d'accueil</a></h1> </br>
             <nav>
                 <ul>
                     <li class="deroulant"><a href="page_joueur.php">Joueurs &ensp;</a>
@@ -49,9 +49,9 @@ is_logged();
     <main>
         <div class="list_page">
             <form action="page_add_joueur.php">
-                <button type="submit">ajouter un joueur</button>
+                <button class="bouton" type="submit">ajouter un joueur</button>
             </form>
-            <hr class="dashed">
+            <hr class="dashed"><hr/>
             <?php
 
 
@@ -80,14 +80,14 @@ is_logged();
                     $nom = $double_tab[$i][1];
                     $prenom = $double_tab[$i][2];
                     $age = $double_tab[0][$y];
+                    $photo = $double_tab[$i][8];
                     echo "</td>";
                 }
                 $identifiant = $double_tab[$i][0];
                 echo "<td>";
-
-                echo '<a href="page_admin.php?id=' . $identifiant . '"><button class="acceder">acceder</button></a>';
-                echo "</td>";
-                echo "</tr>";
+                echo '<a href="page_admin.php?id=' . $identifiant . '"><button class="acceder bouton">acceder</button></a>';
+                echo "</td><td><img class=\"photo\" src=".$photo."></td></tr>";
+                
             }
             echo "</table>";
 
@@ -98,7 +98,10 @@ is_logged();
 
             
             ?>
+            
+            
         </div>
+        
 
     </main>
     <footer>
