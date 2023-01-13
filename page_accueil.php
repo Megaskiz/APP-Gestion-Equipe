@@ -13,7 +13,6 @@ is_logged();
 
 <body>
     <?php
-    session_start();
     ///Connexion au serveur MySQL
     try {
         $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
