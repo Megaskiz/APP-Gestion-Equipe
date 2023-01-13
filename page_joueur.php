@@ -84,7 +84,9 @@
             }
             echo "</table>";
 
-            ///Fermeture du curseur d'analyse des résultats
+        
+
+            /// fermeture du curseur des résultats
             $res->closeCursor();
             ?>
         </div>

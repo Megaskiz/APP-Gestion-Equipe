@@ -47,6 +47,7 @@
         }
     }
     ?>
+    
     <div class="corps">
         <div class="connect-page">
         <h1>Page de cOnnEctIOn</h1></br></br>
