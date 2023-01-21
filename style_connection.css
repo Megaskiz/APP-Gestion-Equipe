@@ -1,12 +1,50 @@
+* {
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg, rgb(255, 255, 255) 0%, #771ddd 175%);
+    height: 100vh;
+}
+
+.corps {
+    width: 50%;
+    padding: 1% 0 0;
+    margin: auto;
+}
+
 .connect-page {
     text-align: center;
-    width: 400px;
-    height: 230px;
-    box-shadow: 12px 12px 23px red;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 22px;
     grid-column: 2fr;
     margin: auto;
     margin-top: 10%;
+    background-color: #552a86;
+    color: #fff;
+    padding: 10%;
+}
+
+.input_id {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.img_header {
+    width: 20%;
+    margin: 1%;
 }
 
 div {
@@ -21,4 +59,23 @@ body {
 
 .connect-page {
     text-align: center;
+}
+
+.button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    background-color: #603f85;
+}
+
+.button :hover {
+    background-color: #470a8c;
 }

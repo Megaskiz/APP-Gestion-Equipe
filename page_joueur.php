@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="font-family: Arial,sans-serif;">
+<html lang="en" style=" font-family: Roboto, sans-serif;">
 <?php
 require('fonctions.php');
 is_logged();
@@ -9,6 +9,7 @@ is_logged();
     <meta charset="UTF-8">
     <title>Page d'accueil</title>
     <link rel="stylesheet" href="style_match.css">
+    <link rel="stylesheet" href="style_header.css">
 </head>
 
 <body>
@@ -24,19 +25,22 @@ is_logged();
     ?>
     <header>
         <div>
-            <h1><a class="title1" href="page_accueil.php">Page d'accueil</a></h1> </br>
+            <a href="page_accueil.php">
+                <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
+                <h1>BALL MANAGEMENT</h1>
+            </a>
             <nav>
                 <ul>
-                    <li class="deroulant"><a href="page_joueur.php">Joueurs &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_joueur.php">Joueurs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_joueur.php">Tous les joueurs</a></li>
-                            <li><a href="page_joueur.php">Ajouter un joueur</a></li>
+                            <li><a href="page_add_joueur.php">Ajouter un joueur</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant"><a href="page_match.php">Matchs &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
-                            <li><a href="">Tous les matchs</a></li>
-                            <li><a href="page_match.php">Ajouter un match</a></li>
+                            <li><a href="page_match.php">Tous les matchs</a></li>
+                            <li><a href="page_add_match.php">Ajouter un match</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Contact</a></li>
@@ -51,7 +55,8 @@ is_logged();
             <form action="page_add_joueur.php">
                 <button class="bouton" type="submit">ajouter un joueur</button>
             </form>
-            <hr class="dashed"><hr/>
+            <hr class="dashed">
+            <hr />
             <?php
 
 
@@ -71,8 +76,10 @@ is_logged();
             $liste = array();
             echo "<table>";
 
-
+            
             for ($i = 0; $i < $nombre_ligne; $i++) {
+                $photo = $double_tab[$i][8];
+                echo "<td><img class=\"photo\" src=" . $photo . "></td>";
                 for ($y = 1; $y < 3; $y++) {
                     echo "<td>";
                     print_r($double_tab[$i][$y]);
@@ -80,28 +87,29 @@ is_logged();
                     $nom = $double_tab[$i][1];
                     $prenom = $double_tab[$i][2];
                     $age = $double_tab[0][$y];
-                    $photo = $double_tab[$i][8];
+                    
+                   
                     echo "</td>";
                 }
                 $identifiant = $double_tab[$i][0];
                 echo "<td>";
-                echo '<a href="page_admin.php?id=' . $identifiant . '"><button class="acceder bouton">acceder</button></a>';
-                echo "</td><td><img class=\"photo\" src=".$photo."></td></tr>";
-                
+                echo '<a href="page_profil_joueur.php?id=' . $identifiant . '"><button class="acceder bouton">détail</button></a>';
+                echo "</td>";
+                echo"</tr>";
             }
             echo "</table>";
 
-        
+
 
             /// fermeture du curseur des résultats
             $res->closeCursor();
 
-            
+
             ?>
-            
-            
+
+
         </div>
-        
+
 
     </main>
     <footer>

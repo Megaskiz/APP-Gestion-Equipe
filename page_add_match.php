@@ -8,7 +8,7 @@ is_logged();
 <head>
     <meta charset="UTF-8">
     <title>Page d'accueil</title>
-    <link rel="stylesheet" href="style_accueil.css">
+    <link rel="stylesheet" href="style_match.css">
     <link rel="stylesheet" href="style_header.css">
 </head>
 

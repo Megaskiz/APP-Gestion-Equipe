@@ -47,13 +47,16 @@
         }
     }
     ?>
-    
+
     <div class="corps">
         <div class="connect-page">
-        <h1>Page de cOnnEctIOn</h1></br></br>
+
+            <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
+            <h1>BALL MANAGEMENT</h1>
+
             <form action="" method="post">
-                <input required type="text" name="id" placeholder="Identifiant" require /></br></br>
-                <input required type="password" name="mdp" placeholder="Mot de passe" require /></br></br>
+                <input class="input_id" required type="text" name="id" placeholder="Identifiant" require /></br></br>
+                <input class="input_id" required type="password" name="mdp" placeholder="Mot de passe" require /></br></br>
                 <input class="button" type="submit" value="Acceder">
             </form>
         </div>

@@ -20,9 +20,9 @@ function uploadImage($photo)
             $uniqueName = uniqid('', true);
             //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
             $file = $uniqueName . "." . $extension;
-            $chemin = "images/";
+            $chemin = "projet_photos/";
             //$file = 5f586bf96dcd38.73540086.jpg
-            move_uploaded_file($tmpName, 'images/' . $file);
+            move_uploaded_file($tmpName, 'projet_photos/' . $file);
             $result = $chemin . $file;
         }
     } else {

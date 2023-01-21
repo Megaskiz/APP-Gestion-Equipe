@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter Joueur</title>
-    <link rel="stylesheet" href="style_accueil.css">
-</head>
-
-<body>
-    <?php
-    session_start();
-    ///Connexion au serveur MySQL
-    try {
-        $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
-    }
-    ///Capture des erreurs éventuelles
-    catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-    ?>
+<?php
+require('fonctions.php');
+is_logged();
+///Connexion au serveur MySQL
+try {
+    $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
+}
+///Capture des erreurs éventuelles
+catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+?>
 
 
 <?php
@@ -36,8 +27,8 @@ $ajouterMembre = $linkpdo->prepare('INSERT INTO joueur (nom, prenom, num_licence
 if (!$ajouterMembre) {
     die("Erreur execute");
 }
-$ajouterMembre->execute(array($nom,$prenom,$num_licence,$date_naissance,$taille,$poids,$poste_pref,$statut,$commentaire));
-if(!$ajouterMembre){
+$ajouterMembre->execute(array($nom, $prenom, $num_licence, $date_naissance, $taille, $poids, $poste_pref, $statut, $commentaire));
+if (!$ajouterMembre) {
     die("Erreur");
 }
 
@@ -49,5 +40,3 @@ exit;
 
 
 ?>
-
-

@@ -9,6 +9,7 @@ is_logged();
     <meta charset="UTF-8">
     <title>Page matchs</title>
     <link rel="stylesheet" href="style_match.css">
+    <link rel="stylesheet" href="style_header.css">
 </head>
 
 <body>
@@ -24,19 +25,22 @@ is_logged();
     ?>
     <header>
         <div>
-            <h1><a href="page_accueil.php">Page d'accueil</a></h1> </br>
+            <a href="page_accueil.php">
+                <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
+                <h1>BALL MANAGEMENT</h1>
+            </a>
             <nav>
                 <ul>
-                    <li class="deroulant"><a href="page_joueur.php">Joueurs &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_joueur.php">Joueurs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_joueur.php">Tous les joueurs</a></li>
-                            <li><a href="page_joueur.php">Ajouter un joueur</a></li>
+                            <li><a href="page_add_joueur.php">Ajouter un joueur</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant"><a href="page_match.php">Matchs &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
-                            <li><a href="">Tous les matchs</a></li>
-                            <li><a href="page_match.php">Ajouter un match</a></li>
+                            <li><a href="page_match.php">Tous les matchs</a></li>
+                            <li><a href="page_add_match.php">Ajouter un match</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Contact</a></li>
