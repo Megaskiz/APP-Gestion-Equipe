@@ -11,7 +11,7 @@ a:hover {
 
 header {
     text-align: center;
-    width: 97%;
+    width: 96%;
     height: 20%px;
     box-shadow: 6px 6px 6px red;
     border-radius: 12px;
@@ -58,6 +58,7 @@ nav a {
     color: black;
     border-bottom: 2px solid transparent;
     padding: 10px 0px;
+    transition: all 0.3s;
 }
 
 nav a:hover {
@@ -86,6 +87,7 @@ nav>ul li:hover .sous {
 .sous a {
     padding: 10px;
     border-bottom: none;
+    transition: all 0.3s;
 }
 
 .sous a:hover {
@@ -128,6 +130,7 @@ hr.rounded {
     padding: 1%;
     width: 100%;
     height: 100%;
+    transition: all 0.3s;
 }
 
 .bouton:hover {
