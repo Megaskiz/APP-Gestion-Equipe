@@ -43,10 +43,10 @@ is_logged();
                             <li><a href="page_add_match.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_stat.php">Statistiques &ensp;</a>
                         <ul class="sous">
-                            <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
-                            <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
+                            <li><a href="page_Statistique_match.php">Statistiques par match</a></li>
+                            <li><a href="page_Statistique_joueur.php">Statistiques par joueur</a></li>
                         </ul>
                     </li>
                     <li><a href="page_connection.php?session_destroy():true">Déconnexion</a></li>

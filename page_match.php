@@ -92,6 +92,7 @@ is_logged();
                     echo "<td>";
 
                     echo '<a href="page_match_detail.php?id=' . $identifiant . '"><button class="acceder">acceder</button></a>';
+                    echo '<a href="page_feuille_de_match.php?id_match=' . $identifiant .'"> <button class="equipe">Equipe</button> </a>';
                     echo "</td>";
                     echo "</tr>";
                 }

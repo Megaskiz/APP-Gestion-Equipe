@@ -65,7 +65,7 @@ is_logged();
                 if(isset($_GET['id'])){
                     $id = $_GET['id'];
                     try {
-                        $sql = "SELECT * FROM le_match WHERE id_le_match = $id";
+                        $sql = "SELECT * FROM le_match WHERE Id_le_match = $id";
                         $res = $linkpdo->query($sql);
                     }catch (Exception $e) {
                         die('Erreur : ' . $e->getMessage());
@@ -76,7 +76,7 @@ is_logged();
                     $liste = array();
 
                     //stockage des information du match dans des variables
-                    $id_match = $double_tab[0]['id_le_match'];
+                    $id_match = $double_tab[0]['Id_le_match'];
                     $date_match = $double_tab[0]['date_match'];
                     $heure_match = $double_tab[0]['heure_match'];
                     $equipe_adverse = $double_tab[0]['equipe_adverse'];
@@ -92,7 +92,7 @@ is_logged();
                 }
 
                 ?>
-                <center><h1>Details du matchc</h1></center>
+                <center><h1>Details du match</h1></center>
                 <a href="page_match.php"><button>Retour</button></a>
                 <div>
                     <p class="information" >Date : <?php echo $date_match; ?></p>

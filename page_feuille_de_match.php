@@ -2,7 +2,17 @@
 <html lang="en" style=" font-family: Roboto, sans-serif;">
 <?php
 require('fonctions.php');
-is_logged();
+session_start();
+if (!isset($_SESSION['id_match'])) {
+    $_SESSION['id_match'] = "";
+}
+if (!isset($_SESSION['id_joueur'])) {
+    $_SESSION['id_joueur'] = "";
+}
+if (isset($_GET['id_match'])) {
+    $_SESSION['id_match'] = $_GET['id_match'];
+}
+
 ?>
 
 <head>
@@ -57,9 +67,7 @@ is_logged();
 
     <main>
         <div class="list_page">
-            <form action="page_add_joueur.php">
-                <button class="bouton" type="submit">ajouter un joueur</button>
-            </form>
+          
             <hr class="dashed">
             <hr />
             <?php
@@ -69,7 +77,7 @@ is_logged();
 
             ///Sélection de tout le contenu de la table enfant
             try {
-                $res = $linkpdo->query("SELECT * FROM joueur;");
+                $res = $linkpdo->query("SELECT * FROM joueur where statut = 'Actif' ;");
             } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                 die('Erreur : ' . $e->getMessage());
             }
@@ -98,7 +106,7 @@ is_logged();
                 }
                 $identifiant = $double_tab[$i][0];
                 echo "<td>";
-                echo '<a href="page_profil_joueur.php?id=' . $identifiant . '"><button class="acceder bouton">Détails</button></a>';
+                echo '<a href="page_ajout_feuille_de_match.php?id=' . $identifiant . '"><button class="acceder bouton">Ajouter</button></a>';
                 echo "</td>";
                 echo"</tr>";
             }
