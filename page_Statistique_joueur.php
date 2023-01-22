@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style=" font-family: Roboto, sans-serif;">
+<html lang="en" style="font-family: Arial,sans-serif;">
 <?php
 require('fonctions.php');
 is_logged();
@@ -7,8 +7,8 @@ is_logged();
 
 <head>
     <meta charset="UTF-8">
-    <title>Page d'accueil</title>
-    <link rel="stylesheet" href="style_match.css">
+    <title>Page de Statistique de Joueurs</title>
+    <link rel="stylesheet" href="style_accueil.css">
     <link rel="stylesheet" href="style_header.css">
 </head>
 
@@ -23,7 +23,7 @@ is_logged();
         die('Erreur : ' . $e->getMessage());
     }
     ?>
-    <header>
+   <header>
         <div>
             <a href="page_accueil.php">
                 <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
@@ -54,67 +54,7 @@ is_logged();
             </nav>
         </div>
     </header>
-
     <main>
-        <div class="list_page">
-            <form action="page_add_joueur.php">
-                <button class="bouton" type="submit">ajouter un joueur</button>
-            </form>
-            <hr class="dashed">
-            <hr />
-            <?php
-
-
-
-
-            ///Sélection de tout le contenu de la table enfant
-            try {
-                $res = $linkpdo->query("SELECT * FROM joueur;");
-            } catch (Exception $e) { // toujours faire un test de retour en cas de crash
-                die('Erreur : ' . $e->getMessage());
-            }
-
-            ///Affichage des entrées du résultat une à une
-
-            $double_tab = $res->fetchAll(); // je met le result de ma query dans un double tableau
-            $nombre_ligne = $res->rowCount();
-            $liste = array();
-            echo "<table>";
-
-            
-            for ($i = 0; $i < $nombre_ligne; $i++) {
-                $photo = $double_tab[$i][8];
-                echo "<td><img class=\"photo\" src=" . $photo . "></td>";
-                for ($y = 1; $y < 3; $y++) {
-                    echo "<td>";
-                    print_r($double_tab[$i][$y]);
-                    $liste[$y] = $double_tab[$i][$y];
-                    $nom = $double_tab[$i][1];
-                    $prenom = $double_tab[$i][2];
-                    $age = $double_tab[0][$y];
-                    
-                   
-                    echo "</td>";
-                }
-                $identifiant = $double_tab[$i][0];
-                echo "<td>";
-                echo '<a href="page_profil_joueur.php?id=' . $identifiant . '"><button class="acceder bouton">détail</button></a>';
-                echo "</td>";
-                echo"</tr>";
-            }
-            echo "</table>";
-
-
-
-            /// fermeture du curseur des résultats
-            $res->closeCursor();
-
-
-            ?>
-
-
-        </div>
-
 
     </main>
     <footer>

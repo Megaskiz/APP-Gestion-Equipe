@@ -43,7 +43,12 @@ is_logged();
                             <li><a href="page_add_match.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                        <ul class="sous">
+                            <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
+                            <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
+                        </ul>
+                    </li>
                     <li><a href="page_connection.php?session_destroy():true">Déconnexion</a></li>
                 </ul>
             </nav>
@@ -52,6 +57,7 @@ is_logged();
 
     <main>
         <div class="list_page">
+            <center><h1>Ajout d'un Joueur</h1></center>
             <form method="POST" action="traitement.php">
                 <label for="nom">Nom :</label><br>
                 <input type="text" id="nom" name="nom" required><br>
@@ -74,8 +80,12 @@ is_logged();
                 <label for="poste_pref">Poste préféré :</label><br>
                 <input type="text" id="poste_pref" name="poste_pref" required><br>
 
-                <label for="statut">Statut :</label><br>
-                <input type="text" id="statut" name="statut" required><br>
+                
+                <label for="statut">Statut :</label><br> 
+                <select name="statut" id="statut">
+                    <option value="Actif">Actif</option>
+                    <option value="Inactif">Inactif</option>
+                </select><br>   
 
                 <label for="commentaire">Commentaires sur le joueur :</label><br>
                 <textarea id="commentaire" name="commentaire"></textarea><br><br>

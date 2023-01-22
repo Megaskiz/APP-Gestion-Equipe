@@ -12,6 +12,8 @@ td,
 tr {
     font-weight: bold;
     border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 1px;
 }
 
 hr.rounded {

@@ -43,13 +43,17 @@ is_logged();
                             <li><a href="page_add_match.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                        <ul class="sous">
+                            <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
+                            <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
+                        </ul>
+                    </li>
                     <li><a href="page_connection.php?session_destroy():true">Déconnexion</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <main>
         <div class="menu_match">
 
@@ -87,7 +91,7 @@ is_logged();
                     $identifiant = $double_tab[$i][0];
                     echo "<td>";
 
-                    echo '<a href="page_admin.php?id=' . $identifiant . '"><button class="acceder">acceder</button></a>';
+                    echo '<a href="page_match_detail.php?id=' . $identifiant . '"><button class="acceder">acceder</button></a>';
                     echo "</td>";
                     echo "</tr>";
                 }
