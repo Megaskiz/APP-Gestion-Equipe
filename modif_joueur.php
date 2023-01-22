@@ -78,6 +78,7 @@ if (isset($_FILES['photo_joueur'])) {
             <center><h1>Modification du profil du joueur </h1></center>
             <?php if (isset($_GET['id'])) { 
                 $id = $_GET['id'];
+                $_SESSION['id'] = $id;
                 ///Sélection de tout le contenu de la table joueur
                 try {
                     $res = $linkpdo->query("SELECT * FROM joueur where id_joueur='$id'");
@@ -142,18 +143,21 @@ if (isset($_FILES['photo_joueur'])) {
                         <?php } ?>
                     </div>
                     <div class="profil_joueur_info">
+                        <form action="page_ajt_modif.php" method="POST">
                         <h2 class="nom_joueur"><?php echo $nom . " " . $prenom; ?></h2>
-                        <p class="information">Numéro de licence : <?php echo $num_licence; ?></p>
+
+                        <p class="information">Numéro de licence :<?php echo htmlspecialchars($num_licence)?></p>
                         <p class="information">Date de naissance : <?php echo $date; ?></p>
-                        <p class="information">Taille : <?php echo $taille; ?> cm</p>
-                        <p class="information">Poids : <?php echo $poids; ?> kg</p>
-                        <p class="information">Poste préféré : <?php echo $post_pref; ?></p>
-                        <p class="information">Statut : <?php echo $statut; ?></p>
-                        <p class="information">Commentaire : <i><?php echo $commentaire; ?></i></p>
+                        <p class="information">Taille : </p><input name="taille" type="taille" value="<?php echo htmlspecialchars($taille)?>">
+                        <p class="information">Poids : </p><input name="poids" type="poids" value="<?php echo htmlspecialchars($poids)?>">
+                        <p class="information">Poste préféré : </p><input name="post_pref" type="post_pref" value="<?php echo htmlspecialchars($post_pref)?>">
+                        <p class="information">Statut : </p><input name="statut" type="statut" value="<?php echo htmlspecialchars($statut)?>">
+                        <p class="information">Commentaire : </p><input name="commentaire" type="commentaire" value="<?php echo htmlspecialchars($commentaire)?>">
+                        <button type="submit">Valider la modification</button>
+                        </form>
                     </div>
                     
                 </div>
-                <a href="modif_joueur.php?id=<?php echo $_GET['id'];?> "><button>Valider la modification</button></a> 
                 <a href="page_profil_joueur.php?id=<?=$_GET['id']?>"><button>Annuler</button></a>
         <?php } else { 
             echo "Aucun joueur n'a été sélectionné";
