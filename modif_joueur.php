@@ -168,7 +168,7 @@ if (isset($_FILES['photo_joueur'])) {
                             </select><br>
 
 
-                            <label for="statut">Statut :</label><br>
+                            <p class="information">Statut :</p>
                             <select name="statut" id="statut">
                                 <option value="Actif" <?php if ($statut == "Actif") echo "selected"; ?>>Actif</option>
                                 <option value="Inactif"<?php if ($statut == "Inactif") echo "selected"; ?>>Inactif</option>
