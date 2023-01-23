@@ -76,7 +76,7 @@ is_logged();
                     $liste = array();
 
                     //stockage des information du match dans des variables
-                    $id_match = $double_tab[0]['Id_le_match'];
+                    $id_match = $double_tab[0]['id_le_match'];
                     $date_match = $double_tab[0]['date_match'];
                     $heure_match = $double_tab[0]['heure_match'];
                     $equipe_adverse = $double_tab[0]['equipe_adverse'];

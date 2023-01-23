@@ -76,9 +76,16 @@ is_logged();
 
                 <label for="poids">Poids (en kg) :</label><br>
                 <input type="number" id="poids" name="poids" required><br>
-
+                
                 <label for="poste_pref">Poste préféré :</label><br>
-                <input type="text" id="poste_pref" name="poste_pref" required><br>
+                <select name="poste_pref" id="poste_pref">
+                    <option value="Meneur">Poste 1 : Meneur (point guard)</option>
+                    <option value="Arrière">Poste 2 : Arrière (shooting guard)</option>
+                    <option value="Ailier"> Poste 3 : Ailier (small forward)</option>
+                    <option value="Ailier fort">Poste 4 : Ailier fort (power forward)</option>
+                    <option value="Pivot">Poste 5 : Pivot (center)</option>
+                </select><br>
+                
 
                 
                 <label for="statut">Statut :</label><br> 

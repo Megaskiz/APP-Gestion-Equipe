@@ -29,9 +29,7 @@ if (
 
     $ajouterMembre = $linkpdo->prepare('INSERT INTO joueur (nom, prenom, num_licence, date_naissance, taille, poids, poste_pref, statut, commentaire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
-    if (!$ajouterMembre) {
-        die("Erreur execute");
-    }
+    
     $ajouterMembre->execute(array($nom, $prenom, $num_licence, $date_naissance, $taille, $poids, $poste_pref, $statut, $commentaire));
 
     header('Location: page_joueur.php');

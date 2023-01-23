@@ -7,38 +7,35 @@ is_logged();
 // la partie de la connexion
 ///Connexion au serveur MySQL
 try {
-    $linkpdo = new PDO("mysql:host=localhost;dbname=bddsae", "root", "");
+    $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
 }
 ///Capture des erreurs éventuelles
 catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-$id=$_SESSION['id'];
-$taille = $_POST['taille'];
-$poids = $_POST['poids'];
-$post_pref = $_POST['post_pref'];
-$statut = $_POST['statut'];
-$commentaire = $_POST['commentaire'];
 
-$reqSQL = "UPDATE joueur  SET taille=".$taille." ,poids=". $poids.",post_pref=".$post_pref.",statut= ".$statut.",commentaire= ".$commentaire." WHERE id= ".$_SESSION['id']."";
+if (
+    isset($_SESSION['id'])
+) {
+    //je shouais faire un update de la table joueur
+    // appartir des information récuperé sur la page de formulaire de la page modif_joueur.php
+    //donc update la taille, poids, poste_pref,statut,commentaire
 
-$req = $linkpdo->prepare('UPDATE joueur  SET taille=? ,poids= ?,poste_pref= "?",statut= "?",commentaire= "?" WHERE id_joueur= ?');
+    $id = $_SESSION['id'];
+    $taille = $_POST['taille'];
+    $poids = $_POST['poids'];
+    $poste_pref = $_POST['poste_pref'];
+    $statut = $_POST['statut'];
+    $commentaire = $_POST['commentaire'];
 
-if ($req == false) {
-    die("erreur linkpdo");
-}
-///Exécution de la requête
-try {
-    $req->execute([$taille, $poids, $post_pref, $statut, $commentaire,$_SESSION['id']]);
-
-    if ($req == false) {
-        $req->debugDumpParams();
-        die("erreur execute");
+    $reqM = "UPDATE joueur SET taille = '$taille', poids = '$poids', poste_pref = '$poste_pref', statut = '$statut', commentaire = '$commentaire' WHERE joueur.id_joueur = $id;";
+    try {
+        $res = $linkpdo->query($reqM);
+    } catch (Exception $e) { // toujours faire un test de retour au cas ou ça crash
+        die('Erreur : ' . $e->getMessage());
     }
-    echo $reqSQL;
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
+
+    //retour sur la page de profil du joueur en question
+    header('Location: page_profil_joueur.php?id=' . $id);
+    
 }
-/*
-header('Location: page_profil_joueur.php?id=' . $_SESSION['id'] . '');
-exit();*/
