@@ -167,11 +167,12 @@ if (isset($_FILES['photo_joueur'])) {
                                 <option value="Pivot" <?php if ($poste_pref == "Pivot") echo "selected"; ?>>Poste 5 : Pivot (center)</option>
                             </select><br>
 
-
                             <p class="information">Statut :</p>
                             <select name="statut" id="statut">
+                                <option value="Absent" <?php if ($statut == "Absent") echo "selected"; ?>>Absent</option>
                                 <option value="Actif" <?php if ($statut == "Actif") echo "selected"; ?>>Actif</option>
-                                <option value="Inactif"<?php if ($statut == "Inactif") echo "selected"; ?>>Inactif</option>
+                                <option value="Blessé" <?php if ($statut == "Blessé") echo "selected"; ?>>Blessé</option>
+                                <option value="Suspendu" <?php if ($statut == "Suspendu") echo "selected"; ?>>Suspendu</option>
                             </select><br>
 
                             <p class="information">Commentaire : </p><input name="commentaire" type="commentaire" value="<?php echo htmlspecialchars($commentaire) ?>">

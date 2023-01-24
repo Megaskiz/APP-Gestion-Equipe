@@ -91,8 +91,12 @@ is_logged();
                 <label for="statut">Statut :</label><br> 
                 <select name="statut" id="statut">
                     <option value="Actif">Actif</option>
-                    <option value="Inactif">Inactif</option>
-                </select><br>   
+                    <option value="Blessé">Blessé</option>
+                    <option value="Suspendu">Suspendu</option>
+                    <option value="Absent">Absent</option>
+                </select><br>
+
+               
 
                 <label for="commentaire">Commentaires sur le joueur :</label><br>
                 <textarea id="commentaire" name="commentaire"></textarea><br><br>
