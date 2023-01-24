@@ -2,16 +2,11 @@
 <html lang="en" style=" font-family: Roboto, sans-serif;">
 <?php
 require('fonctions.php');
-session_start();
-if (!isset($_SESSION['id_match'])) {
-    $_SESSION['id_match'] = "";
+
+if(!isset($_GET['id_match'])) {
+    die("erreur, id_match non initialisé");
 }
-if (!isset($_SESSION['id_joueur'])) {
-    $_SESSION['id_joueur'] = "";
-}
-if (isset($_GET['id_match'])) {
-    $_SESSION['id_match'] = $_GET['id_match'];
-}
+$id_match = $_GET['id_match'];
 
 ?>
 
@@ -106,7 +101,7 @@ if (isset($_GET['id_match'])) {
                 }
                 $identifiant = $double_tab[$i][0];
                 echo "<td>";
-                echo '<a href="page_ajout_feuille_de_match.php?id=' . $identifiant . '"><button class="acceder bouton">Ajouter</button></a>';
+                echo '<a href="page_ajout_feuille_de_match.php?id=' . $identifiant ."&id_match=".$id_match. '"><button class="acceder bouton">Ajouter</button></a>';
                 echo "</td>";
                 echo"</tr>";
             }
@@ -116,8 +111,8 @@ if (isset($_GET['id_match'])) {
 
             /// fermeture du curseur des résultats
             $res->closeCursor();
-
-
+            
+            echo $id_match;
             ?>
 
 
@@ -125,6 +120,8 @@ if (isset($_GET['id_match'])) {
 
 
     </main>
+   
+
     <footer>
 
     </footer>

@@ -3,9 +3,9 @@
     <?php
     require('fonctions.php');
     is_logged();
-    if (isset($_GET['id_joueur'])) {
-        $_SESSION['id_joueur'] = $_GET['id_joueur'];
-    }
+    $id_match = $_GET['id_match'];
+    $identifiant = $_GET['id'];
+   
     ?>
 
     <head>
@@ -75,13 +75,14 @@
                         die('Erreur : ' . $e->getMessage());
                     }
                 }
-
+                
+                echo $identifiant;
                 $double_tab = $res->fetchAll(); // je met le result de ma query dans un double tableau
                     $nombre_ligne = $res->rowCount(); // =1 car il y a 1 ligne dans ma requete
                     $liste = array();
         
         
-                    
+                    $id_joueur = ucfirst($double_tab[0][0]);
                     $nom = ucfirst($double_tab[0][1]);
                     $prenom = ucfirst($double_tab[0][2]);
                     $num_licence = ucfirst($double_tab[0][3]);
@@ -113,6 +114,7 @@
                         <div class="profil_joueur_info">
                             <h2 class="nom_joueur"><?php echo $nom . " " . $prenom; ?></h2>
                             <p class="information">Numéro de licence : <?php echo $num_licence; ?></p>
+                            <p class="information"> id : <?php echo $id_joueur; ?></p>
                             <p class="information">Date de naissance : <?php echo $date; ?></p>
                             <p class="information">Taille : <?php echo $taille; ?> m</p>
                             <p class="information">Poids : <?php echo $poids; ?> kg</p>
@@ -135,15 +137,22 @@
                         <option value="pivot">Pivot</option>
                     </select><br> 
                     <label for="note">Note :</label><br>
-                    <input type="text" id="note" name="note" ><br>
+                    <select name="note" id="note">
+                        <option value="1">1/5</option>
+                        <option value="2">2/5</option>
+                        <option value="3">3/5</option>
+                        <option value="4">4/5</option>
+                        <option value="5">5/5</option>
+                    </select><br>  
 
                     <label for="titulaire">Titulaire :</label><br> 
                     <select name="titulaire" id="titulaire">
-                        <option value="1">1</option>
-                        <option value="0">0</option>
+                        <option value="1">Oui</option>
+                        <option value="0">Non</option>
                     </select><br>  
-                    <input type="hidden" name="id_match" value="<?php echo $_SESSION['id_match']; ?>">
-                    <input type="hidden" name="id_joueur" value="<?php echo $_SESSION['id_joueur']; ?>">
+                    <input type="hidden" name="id_match" value="<?php echo $id_match; ?>">
+                    <input type="hidden" name="id_joueur" value="<?php echo $identifiant; ?>">
+                    
 
                     <input class="bouton" type="submit" value="Valider">
 

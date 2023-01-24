@@ -88,11 +88,11 @@ is_logged();
                         $age = $double_tab[0][$y];
                         echo "</td>";
                     }
-                    $identifiant = $double_tab[$i][0];
+                    $id_match = $double_tab[$i][0];
                     echo "<td>";
 
-                    echo '<a href="page_match_detail.php?id=' . $identifiant . '"><button class="acceder">acceder</button></a>';
-                    echo '<a href="page_feuille_de_match.php?id_match=' . $identifiant .'"> <button class="equipe">Equipe</button> </a>';
+                    echo '<a href="page_match_detail.php?id=' . $id_match . '"><button class="acceder">acceder</button></a>';
+                    echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';
                     echo "</td>";
                     echo "</tr>";
                 }
