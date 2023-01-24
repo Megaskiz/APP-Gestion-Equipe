@@ -2,18 +2,18 @@
 
 require('fonctions.php');
 
-    session_start();
-    
-    
+session_start();
 
-    try {
-        $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
-    }
-    ///Capture des erreurs éventuelles
-    catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-    
+
+
+try {
+    $linkpdo = new PDO("mysql:host=localhost;dbname=bddprojetsport", "root", "");
+}
+///Capture des erreurs éventuelles
+catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+
 
 $id_joueur = $_POST['id_joueur'];
 $id_match = $_POST['id_match'];
@@ -28,9 +28,4 @@ try {
 }
 
 
-header('Location: page_accueil.php');
-        ?>
-
-
-    
-
+header('Location: page_match_detail.php?id=' . $id_match . '');

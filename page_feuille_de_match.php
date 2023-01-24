@@ -62,9 +62,14 @@ $id_match = $_GET['id_match'];
 
     <main>
         <div class="list_page">
+        <center><h2>Liste des Joueurs Actif</h2></center>
+            
           
             <hr class="dashed">
+
             <hr />
+            <?= '<a href="page_match_detail.php?id=' . $id_match . '"><button>Retour</button></a>' ?>
+
             <?php
 
 
@@ -112,7 +117,6 @@ $id_match = $_GET['id_match'];
             /// fermeture du curseur des résultats
             $res->closeCursor();
             
-            echo $id_match;
             ?>
 
 

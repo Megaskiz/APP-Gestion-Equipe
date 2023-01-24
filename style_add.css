@@ -88,3 +88,20 @@ textarea {
 
 
 /*------------------------------------------------------------------------*/
+
+.list_joueur th {
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    width: 20%;
+    text-align: left;
+}
+
+.list_joueur tr {
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-style: italic;
+}
+
+h3 {
+    padding: 2%;
+}

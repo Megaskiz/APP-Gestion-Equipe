@@ -103,6 +103,8 @@ is_logged();
                     <p class="information">Resultat : <?php echo $resultat; ?></p>
                 </div>
                 <?php
+                echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Ajouter un joueur</button> </a>';
+
 
                 $req2="SELECT joueur.num_licence,joueur.nom,joueur.prenom,id_le_match,joueur.id_joueur, poste,note,titulaire FROM participe,joueur WHERE id_le_match =".$id_match." AND joueur.id_joueur = participe.id_joueur; ";
               
@@ -124,16 +126,18 @@ is_logged();
                 }else{
                     $titulaire = "Remplaçant";
                 }
+                
 
-                echo "<h4>Joueurs qui ont participer au match</h4>";
+                echo "<center><h3>Liste des joueur de ce match</h3></center>";
+                echo '<hr class="dashed"><hr />';
                 echo "<br>";
-                echo "<table>";
+                echo '<table class="list_joueur">';
                 echo "<tr>";
                 echo "<th>Nom</th>";
                 echo "<th>Prenom</th>";
                 echo "<th>Poste</th>";
                 echo "<th>Note du match</th>";
-                echo "<th>Titulaire</th>";
+                echo "<th>Titulaire/Remplaçant</th>";
                 echo "</tr>";
 
                 for($i=0;$i<$nombre_ligne2;$i++){

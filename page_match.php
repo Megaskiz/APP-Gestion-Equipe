@@ -56,16 +56,18 @@ is_logged();
     </header>
     <main>
         <div class="menu_match">
-
             <div class="list_page">
                 <form action="page_add_match.php">
                     <button type="submit">ajouter un match</button>
                 </form>
+            </div>
+            <div class="list_page">
+                <center><h2>Listes des matchs à venir </h2></center>
                 <hr class="dashed">
                 <?php
                 ///Sélection de tout le contenu de la table enfant
                 try {
-                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`;');
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`  WHERE date_match > CURRENT_DATE();');
                 } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                     die('Erreur : ' . $e->getMessage());
                 }
@@ -92,7 +94,7 @@ is_logged();
                     echo "<td>";
 
                     echo '<a href="page_match_detail.php?id=' . $id_match . '"><button class="acceder">acceder</button></a>';
-                    echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';
+                    /*echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';*/
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -102,6 +104,53 @@ is_logged();
                 $res->closeCursor();
                 ?>
             </div>
+
+            <div class="list_page">
+                <center><h2>Liste des matchs qui on eu lieu</h2></center>
+                <hr class="dashed">
+                <?php
+                // 
+                ///Sélection de tout le contenu de la table enfant
+                try {
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`  WHERE date_match < CURRENT_DATE();');
+                } catch (Exception $e) { // toujours faire un test de retour en cas de crash
+                    die('Erreur : ' . $e->getMessage());
+                }
+
+                ///Affichage des entrées du résultat une à une
+
+                $double_tab = $res->fetchAll(); // je met le result de ma query dans un double tableau
+                $nombre_ligne = $res->rowCount();
+                $liste = array();
+                echo "<table>";
+                
+                for ($i = 0; $i < $nombre_ligne; $i++) {
+                    for ($y = 1; $y < 3; $y++) {
+                        echo "<td>";
+                        print_r($double_tab[$i][$y]);
+                        $liste[$y] = $double_tab[$i][$y];
+                        $nom = $double_tab[$i][1];
+                        $prenom = $double_tab[$i][2];
+                        $age = $double_tab[0][$y];
+                        echo "</td>";
+                    }
+                    $id_match = $double_tab[$i][0];
+                    echo "<td>";
+
+                    echo '<a href="page_match_detail.php?id=' . $id_match . '"><button class="acceder">acceder</button></a>';
+                    /*echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';*/
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+
+                ///Fermeture du curseur d'analyse des résultats
+                $res->closeCursor();
+
+                ?>
+            </div>
+
+           
             <div>
 
             </div>
