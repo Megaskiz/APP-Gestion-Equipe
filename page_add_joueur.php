@@ -58,12 +58,15 @@ is_logged();
     <main>
         <div class="list_page">
             <center><h1>Ajout d'un Joueur</h1></center>
-            <form method="POST" action="traitement.php">
+            <form method="POST" action="traitement2.php">
                 <label for="nom">Nom :</label><br>
                 <input type="text" id="nom" name="nom" required><br>
 
                 <label for="prenom">Prénom :</label><br>
                 <input type="text" id="prenom" name="prenom" required><br>
+                
+                <label for="photo_joueur">Photo du joueur :</label><br>
+                <input name="photo_joueur" type="file" class="zip_input" required="required">
 
                 <label for="num_licence">Numéro de licence :</label><br>
                 <input type="text" id="num_licence" name="num_licence" required><br>
@@ -101,6 +104,8 @@ is_logged();
                 <label for="commentaire">Commentaires sur le joueur :</label><br>
                 <textarea id="commentaire" name="commentaire"></textarea><br><br>
 
+        
+                //Bouton d'envoi du formulaire
                 <input class="bouton" type="submit" value="Envoyer">
             </form>
         </div>

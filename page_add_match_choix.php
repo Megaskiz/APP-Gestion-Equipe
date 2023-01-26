@@ -40,7 +40,7 @@ is_logged();
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
                     <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
@@ -54,43 +54,18 @@ is_logged();
             </nav>
         </div>
     </header>
+
     <main>
         <div class="list_page">
-           
-            <center>
-                <h1>Ajout d'un match</h1>
-            </center>
-            <form method="POST" action="traitement.php">
-                <label for="date_match">Date du match :</label><br>
-              
-                <i style="font-size:11px;">La date du match doit être antérieur à la date du jour</i>
-                <input type="date" id="date_match" name="date_match" required max="<?php echo $date_actuelle = date("Y-m-d");?>"><br>
-
-                <label for="heure_match">Heure du match :</label><br>
-                <input type="time" id="heure_match" name="heure_match" required><br>
-
-                <label for="equipe_adverse">Equipe adverse :</label><br>
-                <input type="text" id="equipe_adverse" name="equipe_adverse" required><br>
-
-                <label for="lieux">Lieux du match :</label><br>
-                <input type="text" id="lieux" name="lieux" required><br>
-
-                <label for="domicile">Domicile :</label><br>
-                <select name="domicile" id="domicile">
-                    <option value="1">Domicile</option>
-                    <option value="0">Exterieur</option>
-                </select><br>
-
-                <label for="resultat">Score :</label><br>
-                <input type="text" id="resultat" name="resultat" placeholder="score équipe - score adverse" required><br>
-
-                <input class="bouton" type="submit" value="Envoyer">
-            </form>
+            <h1>Ajouter un match</h1>
+            <br>
+            <br>
+            <a href="page_add_match.php"><button class="button">Ajouter un match déja passé</button></a>
+            <br>
+            <br>
+            <br>
+            <a href="page_add_match2.php"><button class="button">Ajouter un match futur match</button></a>
         </div>
     </main>
-    <footer>
-
-    </footer>
+    <footer></footer>
 </body>
-
-</html>

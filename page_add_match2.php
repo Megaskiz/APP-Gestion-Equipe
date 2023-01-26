@@ -56,15 +56,13 @@ is_logged();
     </header>
     <main>
         <div class="list_page">
-           
             <center>
                 <h1>Ajout d'un match</h1>
             </center>
-            <form method="POST" action="traitement.php">
+            <form method="POST" action="traitement2.php">
                 <label for="date_match">Date du match :</label><br>
-              
-                <i style="font-size:11px;">La date du match doit être antérieur à la date du jour</i>
-                <input type="date" id="date_match" name="date_match" required max="<?php echo $date_actuelle = date("Y-m-d");?>"><br>
+                <i style="font-size:11px;">La date du match doit être supérieur à la date du jour</i>
+                <input type="date" id="date_match" name="date_match" required min="<?php echo $date_actuelle = date("Y-m-d");?>"><br>
 
                 <label for="heure_match">Heure du match :</label><br>
                 <input type="time" id="heure_match" name="heure_match" required><br>
@@ -82,7 +80,7 @@ is_logged();
                 </select><br>
 
                 <label for="resultat">Score :</label><br>
-                <input type="text" id="resultat" name="resultat" placeholder="score équipe - score adverse" required><br>
+                <input type="text" id="resultat" name="resultat" placeholder="Le match n'a pas encore été joué...l'ajout du score n'est donc pas possible" readonly="readonly"><br>
 
                 <input class="bouton" type="submit" value="Envoyer">
             </form>

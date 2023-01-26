@@ -62,12 +62,14 @@ is_logged();
                 </form>
             </div>
             <div class="list_page">
-                <center><h2>Liste des matchs à venir </h2></center>
+                <center>
+                    <h2>Liste des matchs à venir </h2>
+                </center>
                 <hr class="dashed">
                 <?php
                 ///Sélection de tout le contenu de la table enfant
                 try {
-                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match > CURRENT_DATE();');
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match > CURRENT_DATE()  and statut = 1;');
                 } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                     die('Erreur : ' . $e->getMessage());
                 }
@@ -116,13 +118,15 @@ is_logged();
             </div>
 
             <div class="list_page">
-                <center><h2>Liste des matchs qui on eu lieu</h2></center>
+                <center>
+                    <h2>Liste des matchs qui on eu lieu</h2>
+                </center>
                 <hr class="dashed">
                 <?php
                 // 
                 ///Sélection de tout le contenu de la table enfant
                 try {
-                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match < CURRENT_DATE();');
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match < CURRENT_DATE() and statut = 1;');
                 } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                     die('Erreur : ' . $e->getMessage());
                 }
@@ -138,7 +142,7 @@ is_logged();
                 echo "<th>Date</th>";
                 echo "<th>Score</th>";
                 echo "</tr>";
-                
+
                 for ($i = 0; $i < $nombre_ligne; $i++) {
                     for ($y = 1; $y < 3; $y++) {
                         echo "<td>";
@@ -151,16 +155,16 @@ is_logged();
                     }
                     $id_match = $double_tab[$i][0];
 
-                    if ($Score == null){
+                    if ($Score == null) {
                         //score non renseigné
                         $ScoreF  = "Score non renseigné";
-                    }else{
+                    } else {
                         //score renseigné
-                        $ScoreF = explode("-",$Score);
+                        $ScoreF = explode("-", $Score);
                     }
                     //afficher le score
                     echo "<td>";
-                    echo $ScoreF[0]." - ".$ScoreF[1];
+                    echo $ScoreF[0] . " - " . $ScoreF[1];
                     echo "</td>";
                     echo "<td>";
 
@@ -178,8 +182,62 @@ is_logged();
                 ?>
             </div>
 
-           
-            <div>
+
+            <div class="list_page">
+
+                <center>
+                    <h2>Liste des matchs en préparation</h2>
+                </center>
+                <hr class="dashed">
+                <?php
+                //affichage des match en préparation mais pas fini donc les matchs avec le statut a 0
+                $requeteS = "SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match` WHERE statut = 0";
+                $resultatS = $linkpdo->query($requeteS);
+                $double_tabS = $resultatS->fetchAll(); // je met le result de ma query dans un double tableau
+                $nombre_ligneS = $resultatS->rowCount();
+                $listeS = array();
+
+                if ($nombre_ligneS == 0) {
+                    echo "<center><h3>Aucun match en préparation</h3></center>";
+                } else {
+
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Equipe adverse</th>";
+                    echo "<th>Date</th>";
+                    echo "<th>Score</th>";
+                    echo "</tr>";
+
+                    for ($i = 0; $i < $nombre_ligneS; $i++) {
+                        for ($y = 1; $y < 3; $y++) {
+                            echo "<td>";
+                            print_r($double_tabS[$i][$y]);
+                            $listeS[$y] = $double_tabS[$i][$y];
+                            $nom = $double_tabS[$i][1];
+                            $prenom = $double_tabS[$i][2];
+                            $Score = $double_tabS[$i][3];
+                            echo "</td>";
+                        }
+                        $id_match = $double_tabS[$i][0];
+                        $ScoreF  = "Match non joué";
+
+                        echo "<td>";
+                        echo $ScoreF;
+                        echo "</td>";
+                        echo "<td>";
+
+                        echo '<a href="page_preparation_match.php?id=' . $id_match . '"><button class="acceder">Finir la préparation</button></a>';
+                        /*echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';*/
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                }
+               
+                
+                ?>
+
+                
 
             </div>
         </div>

@@ -17,6 +17,8 @@ if (
     && isset($_POST['num_licence'])
 ) {
 
+    //on recpure la photo du joueur
+    $photo_joueur   = uploadImage($_FILES['photo_joueur']);
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $num_licence = $_POST['num_licence'];
@@ -27,10 +29,10 @@ if (
     $statut = $_POST['statut'];
     $commentaire = $_POST['commentaire'];
 
-    $ajouterMembre = $linkpdo->prepare('INSERT INTO joueur (nom, prenom, num_licence, date_naissance, taille, poids, poste_pref, statut, commentaire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $ajouterMembre = $linkpdo->prepare('INSERT INTO joueur (nom, prenom, num_licence, date_naissance, taille, poids, poste_pref, statut, commentaire, lien_photo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)');
 
     
-    $ajouterMembre->execute(array($nom, $prenom, $num_licence, $date_naissance, $taille, $poids, $poste_pref, $statut, $commentaire));
+    $ajouterMembre->execute(array($nom, $prenom, $num_licence, $date_naissance, $taille, $poids, $poste_pref, $statut, $commentaire, $photo_joueur));
 
     header('Location: page_joueur.php');
     exit();

@@ -56,75 +56,81 @@ is_logged();
         </div>
     </header>
     <main>
-        <div classe="list_page">
-            <h1>Statistique par joueur</h1>
-            <table>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
-                    <th>Moyenne</th>
-                </tr>
-                <?php
-                // on recupere les id de ou des joueurs
-                $sql = "SELECT id_joueur FROM joueur";
-                $result = $linkpdo->query($sql);
+        <div class="list_page">
+            <?php
+            //afficher un tableau avec pour chaque joueur son nom,son prenom,son statut actuel, son poste préféré, son nombre de match joué et sa moyenne de note
+            //on recupere les id de ou des joueurs
+            $sql = "SELECT id_joueur FROM joueur";
+            $result = $linkpdo->query($sql);
+            $tab = $result->fetchAll();
+            // on le met dans un tableau
+            $tab_id = array();
+            foreach ($tab as $key => $value) {
+                $tab_id[] = $value['id_joueur'];
+            }
+            //fermeture du curseur
+            $result->closeCursor();
+
+            //pour chaque joueur du tableau on affiche les données suivante
+            //en fonction de  l'id du tableau on affiche joueur son nom,son prenom,son statut actuel, son poste préféré, son nombre de match joué et sa moyenne de note
+            //crée le tableau qui contiendra les données
+            $tab_nom = array();
+            $tab_prenom = array();
+            $tab_statut = array();
+            $tab_poste_pref = array();
+            $tab_nb_match = array();
+            $tab_moyenne = array();
+
+            foreach ($tab_id as $key => $value) {
+                $reqSQL= "SELECT j.nom, j.prenom, j.statut, j.poste_pref, COUNT(p.id_le_match), AVG(p.note) FROM participe as p, joueur as j WHERE j.id_joueur = p.id_joueur and j.id_joueur = $value";
+                $result = $linkpdo->query($reqSQL);
                 $tab = $result->fetchAll();
                 // on le met dans un tableau
-                $tab_id = array();
                 foreach ($tab as $key => $value) {
-                    $tab_id[] = $value['id_joueur'];
+                    $tab_nom[] = $value['nom'];
+                    $tab_prenom[] = $value['prenom'];
+                    $tab_statut[] = $value['statut'];
+                    $tab_poste_pref[] = $value['poste_pref'];
+                    $tab_nb_match[] = $value['COUNT(p.id_le_match)'];
+                    if ($value['AVG(p.note)'] == null) {
+                        $tab_moyenne[] = "Pas de note";
+                    } else {
+                        $tab_moyenne[] = $value['AVG(p.note)'];
+                    }
                 }
                 //fermeture du curseur
                 $result->closeCursor();
-                //affichage du tableau
-                echo '<br>';
-                //pour chaque joueur du tableau on affiche son nom et son prenom ansi que ça moyenne des notes au match participé
-                //avec la requete suivante "SELECT j.nom, j.prenom, AVG(p.note)FROM participe as p, joueur as j WHERE j.id_joueur = p.id_le_match and j.id_joueur = id_joueur"
-                foreach ($tab_id as $key => $value) {
-                    $sql = "SELECT j.nom, j.prenom, AVG(p.note)FROM participe as p, joueur as j WHERE j.id_joueur = p.id_joueur and j.id_joueur = $value";
-                    $result = $linkpdo->query($sql);
-                    $tab = $result->fetchAll();
-                    // on le met dans un tableau
-                    $tab_nom = array();
-                    foreach ($tab as $key => $value) {
-                        $tab_nom[] = $value['nom'];
-                    }
-                    //fermeture du curseur
-                    $result->closeCursor();
-
-                    // on le met dans un tableau
-                    $tab_prenom = array();
-                    foreach ($tab as $key => $value) {
-                        $tab_prenom[] = $value['prenom'];
-                    }
-                    //fermeture du curseur
-                    $result->closeCursor();
-
-                    // on le met dans un tableau
-                    $tab_moyenne = array();
-                    foreach ($tab as $key => $value) {
-                        if ($value['AVG(p.note)'] == null) {
-                            $tab_moyenne[] = "Pas de note";
-                        } else {
-                            $tab_moyenne[] = $value['AVG(p.note)'];
-                        }
-                    }
-                    //fermeture du curseur
-                    $result->closeCursor();
 
 
+            }
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>Nom</th>";
+            echo "<th>Prenom</th>";
+            echo "<th>Statut</th>";
+            echo "<th>Poste préféré</th>";
+            echo "<th>Nombre de match joué</th>";
+            echo "<th>Moyenne de note</th>";
+            echo "</tr>";
 
-                    //on affiche les données du tableau
-                    for ($i = 0; $i < count($tab_nom); $i++) {
-                        echo '<tr>';
-                        echo '<td>' . $tab_nom[$i] . '</td>';
-                        echo '<td>' . $tab_prenom[$i] . '</td>';
-                        echo '<td>' . $tab_moyenne[$i] . '</td>';
-                        echo '</tr>';
-                    }
-                }
-                ?>
-            </table>
+            //on affiche les données du tableau
+            for ($i = 0; $i < count($tab_nom); $i++) {
+                echo '<tr>';
+                echo '<td>' . $tab_nom[$i] . '</td>';
+                echo '<td>' . $tab_prenom[$i] . '</td>';
+                echo '<td>' . $tab_statut[$i] . '</td>';
+                echo '<td>' . $tab_poste_pref[$i] . '</td>';
+                echo '<td>' . $tab_nb_match[$i] . '</td>';
+                echo '<td>' . $tab_moyenne[$i] . '</td>';
+                echo '</tr>';
+            }
+            echo "</table>";
+
+           
+           
+
+
+            ?>
 
         </div>
 
