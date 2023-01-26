@@ -40,10 +40,10 @@ is_logged();
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -55,16 +55,19 @@ is_logged();
         </div>
     </header>
 
+
     <main>
         <div class="list_page">
-            <center><h1>Ajout d'un Joueur</h1></center>
+            <center>
+                <h1>Ajout d'un Joueur</h1>
+            </center>
             <form method="POST" action="traitement2.php">
                 <label for="nom">Nom :</label><br>
                 <input type="text" id="nom" name="nom" required><br>
 
                 <label for="prenom">Prénom :</label><br>
                 <input type="text" id="prenom" name="prenom" required><br>
-                
+
                 <label for="photo_joueur">Photo du joueur :</label><br>
                 <input name="photo_joueur" type="file" class="zip_input" required="required">
 
@@ -79,7 +82,7 @@ is_logged();
 
                 <label for="poids">Poids (en kg) :</label><br>
                 <input type="number" id="poids" name="poids" required><br>
-                
+
                 <label for="poste_pref">Poste préféré :</label><br>
                 <select name="poste_pref" id="poste_pref">
                     <option value="Meneur">Poste 1 : Meneur (point guard)</option>
@@ -88,10 +91,10 @@ is_logged();
                     <option value="Ailier fort">Poste 4 : Ailier fort (power forward)</option>
                     <option value="Pivot">Poste 5 : Pivot (center)</option>
                 </select><br>
-                
 
-                
-                <label for="statut">Statut :</label><br> 
+
+
+                <label for="statut">Statut :</label><br>
                 <select name="statut" id="statut">
                     <option value="Actif">Actif</option>
                     <option value="Blessé">Blessé</option>
@@ -99,12 +102,12 @@ is_logged();
                     <option value="Absent">Absent</option>
                 </select><br>
 
-               
+
 
                 <label for="commentaire">Commentaires sur le joueur :</label><br>
                 <textarea id="commentaire" name="commentaire"></textarea><br><br>
 
-        
+
                 //Bouton d'envoi du formulaire
                 <input class="bouton" type="submit" value="Envoyer">
             </form>

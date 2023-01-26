@@ -3,7 +3,7 @@
 <?php
 require('fonctions.php');
 
-if(!isset($_GET['id_match'])) {
+if (!isset($_GET['id_match'])) {
     die("erreur, id_match non initialisé");
 }
 $id_match = $_GET['id_match'];
@@ -45,10 +45,10 @@ $id_match = $_GET['id_match'];
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -60,11 +60,14 @@ $id_match = $_GET['id_match'];
         </div>
     </header>
 
+
     <main>
         <div class="list_page">
-        <center><h2>Liste des Joueurs Actif</h2></center>
-            
-          
+            <center>
+                <h2>Liste des Joueurs Actif</h2>
+            </center>
+
+
             <hr class="dashed">
 
             <hr />
@@ -89,7 +92,7 @@ $id_match = $_GET['id_match'];
             $liste = array();
             echo "<table>";
 
-            
+
             for ($i = 0; $i < $nombre_ligne; $i++) {
                 $photo = $double_tab[$i][8];
                 echo "<td><img class=\"photo\" src=" . $photo . "></td>";
@@ -100,15 +103,15 @@ $id_match = $_GET['id_match'];
                     $nom = $double_tab[$i][1];
                     $prenom = $double_tab[$i][2];
                     $age = $double_tab[0][$y];
-                    
-                   
+
+
                     echo "</td>";
                 }
                 $identifiant = $double_tab[$i][0];
                 echo "<td>";
-                echo '<a href="page_ajout_feuille_de_match.php?id=' . $identifiant ."&id_match=".$id_match. '"><button class="acceder bouton">Ajouter</button></a>';
+                echo '<a href="page_ajout_feuille_de_match.php?id=' . $identifiant . "&id_match=" . $id_match . '"><button class="acceder bouton">Ajouter</button></a>';
                 echo "</td>";
-                echo"</tr>";
+                echo "</tr>";
             }
             echo "</table>";
 
@@ -116,7 +119,7 @@ $id_match = $_GET['id_match'];
 
             /// fermeture du curseur des résultats
             $res->closeCursor();
-            
+
             ?>
 
 
@@ -124,7 +127,7 @@ $id_match = $_GET['id_match'];
 
 
     </main>
-   
+
 
     <footer>
 

@@ -48,10 +48,10 @@
                         <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                             <ul class="sous">
                                 <li><a href="page_match.php">Tous les matchs</a></li>
-                                <li><a href="page_add_match.php">Ajouter un match</a></li>
+                                <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                             </ul>
                         </li>
-                        <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                        <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                             <ul class="sous">
                                 <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                                 <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -63,10 +63,11 @@
             </div>
         </header>
 
+
         <div class="list_page">
             <?= '<a href="page_feuille_de_match.php?id_match=' . $id_match . '"><button>Retour</button></a>' ?>
-            
-            
+
+
             <center>
                 <h1>Ajouter ce Joueur au match </h1>
             </center>

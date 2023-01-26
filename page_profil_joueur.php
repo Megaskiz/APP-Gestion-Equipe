@@ -24,7 +24,7 @@ is_logged();
         die('Erreur : ' . $e->getMessage());
     }
     $previous = "javascript:history.go(-1)";
-    if(isset($_SERVER['HTTP_REFERER'])) {
+    if (isset($_SERVER['HTTP_REFERER'])) {
         $previous = $_SERVER['HTTP_REFERER'];
     }
     ?>
@@ -45,10 +45,10 @@ is_logged();
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -59,11 +59,15 @@ is_logged();
             </nav>
         </div>
     </header>
+
+
     <main>
         <div class="list_page">
-        <a href="page_joueur.php"><button>Retour</button></a>
-            <center><h1>Profil du joueur</h1></center>
-            <?php if (isset($_GET['id'])) { 
+            <a href="page_joueur.php"><button>Retour</button></a>
+            <center>
+                <h1>Profil du joueur</h1>
+            </center>
+            <?php if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 ///Sélection de tout le contenu de la table joueur
                 try {
@@ -75,13 +79,13 @@ is_logged();
                 $double_tab = $res->fetchAll(); // je met le result de ma query dans un double tableau
                 $nombre_ligne = $res->rowCount(); // =1 car il y a 1 ligne dans ma requete
                 $liste = array();
-    
-    
-                
+
+
+
                 $nom = ucfirst($double_tab[0][1]);
                 $prenom = ucfirst($double_tab[0][2]);
                 $num_licence = ucfirst($double_tab[0][3]);
-                $date = date_format(new DateTime(strval($double_tab[0][4])), 'd/m/Y');            
+                $date = date_format(new DateTime(strval($double_tab[0][4])), 'd/m/Y');
                 $taille = $double_tab[0][5];
                 $poids = $double_tab[0][6];
                 $post_pref = $double_tab[0][7];
@@ -92,9 +96,9 @@ is_logged();
                 } else {
                     $commentaire = $double_tab[0][10];
                 }
-                
-                
-                ?>
+
+
+            ?>
                 <div class="profil_joueur">
                     <div class="profil_joueur_photo">
                         <?php
@@ -103,7 +107,7 @@ is_logged();
                             echo "<center><h2><i>Aucune photo pour ce joueur</i></h2></center>";
                         } else {
                         ?>
-                        <img class="img" src="<?php echo $lien_photo; ?>" alt="">
+                            <img class="img" src="<?php echo $lien_photo; ?>" alt="">
                         <?php } ?>
                     </div>
                     <div class="profil_joueur_info">
@@ -116,20 +120,20 @@ is_logged();
                         <p class="information">Statut : <?php echo $statut; ?></p>
                         <p class="information">Commentaire : <i><?php echo $commentaire; ?></i></p>
                     </div>
-                    
-                </div>
-                <a href="modif_joueur.php?id=<?php echo $_GET['id'];?> "><button>Modifier le Joueur</button></a> 
-                
 
-        <?php } else { 
-            echo "Aucun joueur n'a été sélectionné";
-        }?>
+                </div>
+                <a href="modif_joueur.php?id=<?php echo $_GET['id']; ?> "><button>Modifier le Joueur</button></a>
+
+
+            <?php } else {
+                echo "Aucun joueur n'a été sélectionné";
+            } ?>
         </div>
     </main>
     <footer>
 
     </footer>
-    
+
 </body>
 
 

@@ -26,7 +26,7 @@ is_logged();
     }
     ?>
     <header>
-        <div class="">
+        <div>
             <a href="page_accueil.php">
                 <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
                 <h1>BALL MANAGEMENT</h1>
@@ -42,10 +42,10 @@ is_logged();
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -56,6 +56,7 @@ is_logged();
             </nav>
         </div>
     </header>
+
     <main>
         <div class="list_page">
             <?php
@@ -83,7 +84,7 @@ is_logged();
             $tab_moyenne = array();
 
             foreach ($tab_id as $key => $value) {
-                $reqSQL= "SELECT j.nom, j.prenom, j.statut, j.poste_pref, COUNT(p.id_le_match), AVG(p.note) FROM participe as p, joueur as j WHERE j.id_joueur = p.id_joueur and j.id_joueur = $value";
+                $reqSQL = "SELECT j.nom, j.prenom, j.statut, j.poste_pref, COUNT(p.id_le_match), AVG(p.note) FROM participe as p, joueur as j WHERE j.id_joueur = p.id_joueur and j.id_joueur = $value";
                 $result = $linkpdo->query($reqSQL);
                 $tab = $result->fetchAll();
                 // on le met dans un tableau
@@ -101,8 +102,6 @@ is_logged();
                 }
                 //fermeture du curseur
                 $result->closeCursor();
-
-
             }
             echo "<table>";
             echo "<tr>";
@@ -127,8 +126,8 @@ is_logged();
             }
             echo "</table>";
 
-           
-           
+
+
 
 
             ?>

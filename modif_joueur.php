@@ -62,10 +62,10 @@ if (isset($_FILES['photo_joueur'])) {
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -76,6 +76,7 @@ if (isset($_FILES['photo_joueur'])) {
             </nav>
         </div>
     </header>
+
 
     <main>
         <div class="list_page">

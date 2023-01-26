@@ -42,10 +42,10 @@ is_logged();
                     <li class="deroulant rubrique"><a href="page_match.php">Matchs &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_match.php">Tous les matchs</a></li>
-                            <li><a href="page_add_match.php">Ajouter un match</a></li>
+                            <li><a href="page_add_match_choix.php">Ajouter un match</a></li>
                         </ul>
                     </li>
-                    <li class="deroulant rubrique"><a href="page_stat.php">Statistique &ensp;</a>
+                    <li class="deroulant rubrique"><a href="page_Statistique_match.php">Statistique &ensp;</a>
                         <ul class="sous">
                             <li><a href="page_Statistique_match.php">Statistique par matchs</a></li>
                             <li><a href="page_Statistique_joueur.php">Statistique par joueur</a></li>
@@ -56,9 +56,12 @@ is_logged();
             </nav>
         </div>
     </header>
+
     <main>
         <div class="block list_page">
-            <center><h1>Statistique par match</h1></center>
+            <center>
+                <h1>Statistique par match</h1>
+            </center>
             <hr class="dashed">
             <h1>Graphique des victoire et defaites</h1>
 
@@ -108,7 +111,7 @@ is_logged();
             ?>
 
 
-            
+
             <canvas id="myChart" class="graph"></canvas>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
             <script>
@@ -145,7 +148,7 @@ is_logged();
         </div>
 
         <div class="block list_page">
-        <h1>Courbe avec l'évolution de la moyenne des points par match dans le temps</h1>
+            <h1>Courbe avec l'évolution de la moyenne des points par match dans le temps</h1>
             <?php
             //recupérer les points de chaque match
             $sql = "SELECT resultat FROM le_match WHERE resultat is NOT null order BY resultat  ";
@@ -161,7 +164,7 @@ is_logged();
                 //match gagné ou perdu ou ,nul
                 $result = explode("-", $score);
                 //afficher le score de chaque match
-                
+
 
                 // si le match n'a pas été joué, on ne l'affiche pas
                 if ($score == null) {
@@ -210,7 +213,7 @@ is_logged();
                 array_push($tabDate, $date);
                 array_push($tabResultat, $score);
             }
-           //on ajoute une colonne au tableau dans la quelle on stocke la moyenne des points par match cumulé dans le temps
+            //on ajoute une colonne au tableau dans la quelle on stocke la moyenne des points par match cumulé dans le temps
             $tabMoyenne = array();
             $moyenne = 0;
             $scoreAddition = 0;
@@ -223,12 +226,12 @@ is_logged();
                 array_push($tabMoyenne, $moyenne);
                 $i++;
             }
-             //fermer le curseur
-             $result1->closeCursor();
+            //fermer le curseur
+            $result1->closeCursor();
 
             //crée une courbe avec l'évolution de la moyenne des points par match dans le temps
             ?>
-            
+
             <canvas id="myChart2" class="graph"></canvas>
             <script>
                 var ctx = document.getElementById('myChart2').getContext('2d');
@@ -257,7 +260,7 @@ is_logged();
                     }
                 });
             </script>
-            
+
 
 
 
