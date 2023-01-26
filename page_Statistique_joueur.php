@@ -11,6 +11,7 @@ is_logged();
     <link rel="stylesheet" href="style_add.css">
     <link rel="stylesheet" href="style_header.css">
     <link rel="stylesheet" href="style_profil.css">
+    <link rel="stylesheet" href="style_stat.css">
 </head>
 
 <body>
