@@ -79,7 +79,7 @@ is_logged();
                 </select><br>
 
                 <label for="resultat">Score :</label><br>
-                <input type="text" id="resultat" name="resultat" required><br>
+                <input type="text" id="resultat" name="resultat" placeholder="score équipe - score adverse" required><br>
 
                 <input class="bouton" type="submit" value="Envoyer">
             </form>

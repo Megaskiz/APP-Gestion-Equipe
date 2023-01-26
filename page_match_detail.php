@@ -88,7 +88,24 @@ is_logged();
                     }else{
                         $domicile = "Exterieur";
                     }
-                    $resultat = $double_tab[0]['resultat'];
+                    
+                    if ($double_tab[0]['resultat'] == null){
+                        //score non renseigné
+                        $versus = "Match non joué";
+                        $resultat = array("non renseigné","non renseigné");
+                       
+                    }else{
+                        //score renseigné
+                        $resultat = explode("-",$double_tab[0]['resultat']);
+                        if($resultat[0] > $resultat[1]){
+                            $versus = "Victoire";
+                        }else if($resultat[0] == $resultat[1]){
+                            $versus = "Match nul";
+                        }else{
+                            $versus = "Défaite";
+                        }
+                    }
+                                        
                 }
 
                 ?>
@@ -100,7 +117,10 @@ is_logged();
                     <p class="information">Equipe adverse : <?php echo $equipe_adverse; ?></p>
                     <p class="information">Lieux : <?php echo $lieux; ?></p>
                     <p class="information">Domicile/Exterieur : <?php echo $domicile; ?></p>
-                    <p class="information">Resultat : <?php echo $resultat; ?></p>
+                    <p class="information">Score équipe : <?php echo $resultat[0] ; ?></p>
+                    <p class="information">Score adverse : <?php echo $resultat[1] ; ?></p>
+                    <p class="information">Resultat : <?php echo $versus ; ?></p>
+
                 </div>
                 <?php
                 echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Ajouter un joueur</button> </a>';

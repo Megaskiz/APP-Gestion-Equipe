@@ -62,12 +62,12 @@ is_logged();
                 </form>
             </div>
             <div class="list_page">
-                <center><h2>Listes des matchs à venir </h2></center>
+                <center><h2>Liste des matchs à venir </h2></center>
                 <hr class="dashed">
                 <?php
                 ///Sélection de tout le contenu de la table enfant
                 try {
-                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`  WHERE date_match > CURRENT_DATE();');
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match > CURRENT_DATE();');
                 } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                     die('Erreur : ' . $e->getMessage());
                 }
@@ -78,6 +78,11 @@ is_logged();
                 $nombre_ligne = $res->rowCount();
                 $liste = array();
                 echo "<table>";
+                echo "<tr>";
+                echo "<th>Equipe adverse</th>";
+                echo "<th>Date</th>";
+                echo "<th>Score</th>";
+                echo "</tr>";
 
 
                 for ($i = 0; $i < $nombre_ligne; $i++) {
@@ -87,10 +92,15 @@ is_logged();
                         $liste[$y] = $double_tab[$i][$y];
                         $nom = $double_tab[$i][1];
                         $prenom = $double_tab[$i][2];
-                        $age = $double_tab[0][$y];
+                        $Score = $double_tab[$i][3];
                         echo "</td>";
                     }
                     $id_match = $double_tab[$i][0];
+                    $ScoreF  = "Match non joué";
+
+                    echo "<td>";
+                    echo $ScoreF;
+                    echo "</td>";
                     echo "<td>";
 
                     echo '<a href="page_match_detail.php?id=' . $id_match . '"><button class="acceder">acceder</button></a>';
@@ -112,7 +122,7 @@ is_logged();
                 // 
                 ///Sélection de tout le contenu de la table enfant
                 try {
-                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match FROM `le_match`  WHERE date_match < CURRENT_DATE();');
+                    $res = $linkpdo->query('SELECT Id_le_match,equipe_adverse, date_match,resultat FROM `le_match`  WHERE date_match < CURRENT_DATE();');
                 } catch (Exception $e) { // toujours faire un test de retour en cas de crash
                     die('Erreur : ' . $e->getMessage());
                 }
@@ -123,6 +133,11 @@ is_logged();
                 $nombre_ligne = $res->rowCount();
                 $liste = array();
                 echo "<table>";
+                echo "<tr>";
+                echo "<th>Equipe adverse</th>";
+                echo "<th>Date</th>";
+                echo "<th>Score</th>";
+                echo "</tr>";
                 
                 for ($i = 0; $i < $nombre_ligne; $i++) {
                     for ($y = 1; $y < 3; $y++) {
@@ -131,11 +146,24 @@ is_logged();
                         $liste[$y] = $double_tab[$i][$y];
                         $nom = $double_tab[$i][1];
                         $prenom = $double_tab[$i][2];
-                        $age = $double_tab[0][$y];
+                        $Score = $double_tab[$i][3];
                         echo "</td>";
                     }
                     $id_match = $double_tab[$i][0];
+
+                    if ($Score == null){
+                        //score non renseigné
+                        $ScoreF  = "Score non renseigné";
+                    }else{
+                        //score renseigné
+                        $ScoreF = explode("-",$Score);
+                    }
+                    //afficher le score
                     echo "<td>";
+                    echo $ScoreF[0]." - ".$ScoreF[1];
+                    echo "</td>";
+                    echo "<td>";
+
 
                     echo '<a href="page_match_detail.php?id=' . $id_match . '"><button class="acceder">acceder</button></a>';
                     /*echo '<a href="page_feuille_de_match.php?id_match=' . $id_match .'"> <button class="equipe">Equipe</button> </a>';*/

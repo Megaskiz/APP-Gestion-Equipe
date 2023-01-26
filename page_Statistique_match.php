@@ -8,8 +8,10 @@ is_logged();
 <head>
     <meta charset="UTF-8">
     <title>Page de Statistique match</title>
-    <link rel="stylesheet" href="style_accueil.css">
+    <link rel="stylesheet" href="style_add.css">
     <link rel="stylesheet" href="style_header.css">
+    <link rel="stylesheet" href="style_profil.css">
+    <link rel="stylesheet" href="style_stat.css">
 </head>
 
 <body>
@@ -23,7 +25,7 @@ is_logged();
         die('Erreur : ' . $e->getMessage());
     }
     ?>
-   <header>
+    <header>
         <div>
             <a href="page_accueil.php">
                 <img class="img_header" src="projet_photos/sticker-basket---joueur-n-5.png" alt="">
@@ -55,6 +57,302 @@ is_logged();
         </div>
     </header>
     <main>
+        <div class="block list_page">
+            <h1>Statistique par match</h1>
+            <?php
+            //afficher un graphique fromage des statistiques de match gagné, p perdu, n nul
+            $sql = "SELECT COUNT(*) AS nb_match, resultat FROM le_match GROUP BY resultat;";
+            $result1 = $linkpdo->query($sql);   //exécution de la requête
+            $data = $result1->fetchAll(PDO::FETCH_ASSOC); //récupération des données
+
+            //afficher les statistiques
+            $gagne = 0;
+            $perdu = 0;
+            $nul = 0;
+            foreach ($data as $row) {
+                $nb_match = $row['nb_match'];
+                $score = $row['resultat'];
+
+                //match gagné ou perdu ou ,nul
+                $result = explode("-", $score);
+                // si le match n'a pas été joué, on ne l'affiche pas
+                if ($score == null) {
+                    continue;
+                } else {
+                    if ($result[0] > $result[1]) {
+
+                        $gagne++;
+                    } elseif ($result[0] < $result[1]) {
+
+                        $perdu++;
+                    } else {
+
+                        $nul++;
+                    }
+                }
+            }
+
+            //afficher le pourcentage de match gagné, perdu, nul
+            $total = $gagne + $perdu + $nul;
+            $pourcentage_gagne = round($gagne / $total * 100, 2);
+            $pourcentage_perdu = round($perdu / $total * 100, 2);
+            $pourcentage_nul = round($nul / $total * 100, 2);
+            echo "<p>Il y a eu $total matchs joués</p>";
+            echo "<p>Il y a eu $gagne matchs gagnés, soit $pourcentage_gagne %</p>";
+            echo "<p>Il y a eu $perdu matchs perdus, soit $pourcentage_perdu %</p>";
+            echo "<p>Il y a eu $nul matchs nuls, soit $pourcentage_nul %</p>";
+
+            ?>
+
+
+            <h1>Graphique</h1>
+            <canvas id="myChart" class="graph"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Match gagné', 'Match perdu', 'Match nul'],
+                        datasets: [{
+                            label: 'Pourcentage de match gagné, perdu, nul',
+                            data: [<?php echo $pourcentage_gagne ?>, <?php echo $pourcentage_perdu ?>, <?php echo $pourcentage_nul ?>],
+                            backgroundColor: [
+                                'rgba(85, 42, 134, 1)',
+                                'rgba(100, 162, 235, 0.2)',
+                                'rgba(100, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(0, 0, 0, 0)',
+                                'rgba(0, 0, 0, 0)',
+                                'rgba(0, 0, 0, 0)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="block list_page">
+
+            <?php
+            //recupérer les points de chaque match
+            $sql = "SELECT resultat FROM le_match WHERE resultat is NOT null order BY resultat; ";
+            $result1 = $linkpdo->query($sql);   //exécution de la requête
+            $data = $result1->fetchAll(PDO::FETCH_ASSOC); //récupération des données
+            $scoreAddition = 0;
+
+            foreach ($data as $row) {
+
+                $score = $row['resultat'];
+
+
+                //match gagné ou perdu ou ,nul
+                $result = explode("-", $score);
+                //afficher le score de chaque match
+                echo "<p>Le score du match est de $score</p>";
+
+                // si le match n'a pas été joué, on ne l'affiche pas
+                if ($score == null) {
+                    continue;
+                } else {
+                    $scoreAddition = $scoreAddition + intval($result[0]);
+                }
+            }
+            //fermer le curseur
+            $result1->closeCursor();
+            echo "<p>Le nombre de points total est de $scoreAddition</p>";
+
+
+            //recuperer le nombre de match joué
+            $sql = "SELECT COUNT(*) AS nb_match FROM le_match WHERE resultat is NOT null;";
+
+            //exécution de la requête
+            $result1 = $linkpdo->query($sql);
+            //récupération des données
+            $data = $result1->fetchAll(PDO::FETCH_ASSOC);
+            //afficher le nombre de match joué
+            foreach ($data as $row) {
+                $nb_match = $row['nb_match'];
+                echo "<p>Il y a eu $nb_match matchs joués</p>";
+            }
+
+            //fermer le curseur
+            $result1->closeCursor();
+
+            $moyenne = $scoreAddition / $nb_match;
+            echo "<p>La moyenne de points par match est de $moyenne</p>";
+            ?>
+
+
+            <h1>Graphique</h1>
+            <canvas id="myChart1" class="graph"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+            <script>
+                var ctx = document.getElementById('myChart1').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Moyenne de points par match'],
+                        datasets: [{
+                            label: 'Moyenne de points par match',
+                            data: [<?php echo $moyenne ?>],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div class="block list_page">
+            <?php
+            //afficher un graphique avec le nombre de point par match dans le temps
+            //on vas recupérer la date et le resultat de chaque match
+            $reqSQl = "SELECT date_match, resultat FROM le_match WHERE resultat is NOT null GROUP BY date_match;";
+            //exécution de la requête
+            $result1 = $linkpdo->query($reqSQl);
+            //récupération des données
+            $data = $result1->fetchAll(PDO::FETCH_ASSOC);
+            //on cree un tableau pour stocker les données
+            $tabDate = array();
+            $tabResultat = array();
+            //on parcours les données
+            foreach ($data as $row) {
+                //on recupère la date et le resultat
+                $date = $row['date_match'];
+                $minitabres =  $result = explode("-", $row['resultat']);
+                $resultat = $minitabres[0];
+                //on ajoute les données dans les tableaux
+                array_push($tabDate, $date);
+                array_push($tabResultat, $resultat);
+            }
+
+
+
+
+            //fermer le curseur
+            $result1->closeCursor();
+            //on affiche les données du tableau dans un graphique en barre avec l'ordonnée qui commence à 0
+            ?>
+            <h1>Graphique</h1>
+            <canvas id="myChart2" class="graph"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+            <script>
+                var ctx = document.getElementById('myChart2').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [<?php echo "'" . implode("','", $tabDate) . "'" ?>],
+                        datasets: [{
+                            label: 'Nombre de points par match',
+                            data: [<?php echo implode(",", $tabResultat) ?>],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div class="block list_page">
+            <?php
+            //on affiche le meme graphique mais avec les scores de l'équipe adverse
+            //on repend les données de la requête précédente
+            //on cree un tableau pour stocker les données
+            $tabDate = array();
+            $tabResultat = array();
+            //on parcours les données
+            foreach ($data as $row) {
+                //on recupère la date et le resultat
+                $date = $row['date_match'];
+                $miniTabRes =  $result = explode("-", $row['resultat']);
+                $resultat = $miniTabRes[1];
+                //on ajoute les données dans les tableaux
+                array_push($tabDate, $date);
+                array_push($tabResultat, $resultat);
+            }
+
+
+            //on affiche les données du tableau dans un graphique en barre avec l'ordonnée qui commence à 0
+            ?>
+            <h1>Graphique</h1>
+            <canvas id="myChart3" class="graph"></canvas>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+            <script>
+                var ctx = document.getElementById('myChart3').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [<?php echo "'" . implode("','", $tabDate) . "'" ?>],
+                        datasets: [{
+                            label: 'Nombre de points par match',
+                            data: [<?php echo implode(",", $tabResultat) ?>],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+
+        </div>
 
     </main>
     <footer>

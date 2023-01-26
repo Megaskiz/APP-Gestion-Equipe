@@ -1,0 +1,12 @@
+.graph {
+    display: block !important;
+    max-width: 50%;
+}
+
+.block {
+    background-color: #eaeaea;
+    border-radius: 5px;
+    margin: 1%;
+    padding: 1%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
